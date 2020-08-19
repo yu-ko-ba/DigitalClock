@@ -16,9 +16,6 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // アプリをフルスクリーンで起動するための処理
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-
         // 現在時刻を表示する処理
         // Handlerクラスのインスタンスを取得しておく
         val handler = Handler()
@@ -37,5 +34,13 @@ class MainActivity : Activity() {
                 time.text = "${hour}:${minute}"
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // アプリをフルスクリーンで起動するための処理
+        // onCreateに書くと、ホーム画面に戻ってから開きなおしたときにフルスクリーンにならない
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 }
